@@ -240,8 +240,8 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    AGENT["AI Agent"] -->|"xyks_ai.py status"| J1["{\"score\":3245,<br/>\"pace\":\"10.5min\",<br/>\"health\":\"ok\"}"]
-    AGENT -->|"diagnose"| J2["{\"issues\":[],<br/>\"advice\":\"...\"}"]
+    AGENT["AI Agent"] -->|"xyks_ai.py status"| J1["score: 3245<br/>pace: 10.5min<br/>health: ok"]
+    AGENT -->|"diagnose"| J2["issues: 空数组<br/>advice: 处置提示"]
     AGENT -->|"round --once"| J3["单局执行结果"]
     AGENT -->|"logs --tail 50"| J4["最近日志数组"]
     J1 & J2 & J3 & J4 --> AGENT
