@@ -12,8 +12,21 @@ import login_sms as _L
 
 PHONE = os.environ.get("XYKS_PHONE", "")
 CODE = os.environ.get("XYKS_SMS_CODE", "")
+
+# 第一段：--send-code 仅触发下发短信验证码（用户随后把 6 位码报回给操作者）
+if "--send-code" in sys.argv:
+    if not PHONE:
+        print("请设置环境变量 XYKS_PHONE 后再执行 --send-code")
+        sys.exit(1)
+    st, msg = C.sms_send_code(PHONE)
+    print("send_code http=%s resp=%s" % (st, msg))
+    print("OK: 短信已发出，请等待用户回传 6 位验证码，再执行：")
+    print("    XYKS_PHONE=... XYKS_SMS_CODE=<验证码> python login136.py")
+    sys.exit(0 if st == 200 else 1)
+
 if not PHONE or not CODE:
     print("请设置环境变量 XYKS_PHONE / XYKS_SMS_CODE")
+    print("（首次登录先执行 --send-code 下发短信）")
     sys.exit(1)
 
 ck, err = C.sms_login(PHONE, CODE)
