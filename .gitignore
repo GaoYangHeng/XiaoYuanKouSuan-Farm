@@ -15,9 +15,7 @@ req_capture.log
 _rank_out.txt
 .ms_upload_cache
 
-# 自备二进制（版权原因不入库，见 README 快速开始）
-xyks/so/
-*.so
+# 说明：xyks/so/ 的签名 so 随仓库分发（仅含目标应用公开二进制，无任何用户数据）
 
 # 环境
 __pycache__/

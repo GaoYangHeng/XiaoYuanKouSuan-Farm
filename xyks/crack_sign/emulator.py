@@ -5,7 +5,7 @@ from elftools.elf.elffile import ELFFile
 from elftools.elf.relocation import RelocationSection
 
 _D = os.path.dirname(os.path.abspath(__file__))
-SO = os.path.join(os.path.dirname(_D), "so", "libRequestEncoder.so")  # 自备：见 README 快速开始
+SO = os.path.join(os.path.dirname(_D), "so", "libRequestEncoder.so")  # 已随仓库附带于 xyks/so/
 
 from unicorn import *
 from unicorn.arm_const import *

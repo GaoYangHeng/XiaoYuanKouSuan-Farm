@@ -15,7 +15,7 @@ flowchart TD
 ```powershell
 # 依赖
 pip install unicorn pyelftools
-# so 放入 xyks/so/ 后：
+# 签名 so 已随仓库附带（xyks/so/）：
 python xyks_ai.py start     # 无窗口后台
 python xyks_tui.py          # 看仪表盘
 python xyks_ai.py stop      # 停止

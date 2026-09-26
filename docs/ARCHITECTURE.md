@@ -13,7 +13,7 @@ flowchart TB
     D3 --> E["四轮 md5 链:<br/>h1=md5(P+K)<br/>h2=md5(P+K+h1+P)<br/>h3=md5(P+K+h1+P+h2+T410)<br/>sign=md5(P+K+h1+P+h2+T410+h3+K)"]
 
     E --> F["✅ 纯 Python 复现<br/>xyks/crack_sign（emulator 后端）"]
-    D1 -.->|"自备 APK 提取 so +<br/>1s-Answer 的 patch 脚本"| F
+    D1 -.->|"仓库附带 xyks/so/<br/>（可选：APK 提取核验 / patch 脚本）"| F
 
     classDef key fill:#fff4d6,stroke:#e0a800,color:#000
     class E,F key

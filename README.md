@@ -49,13 +49,13 @@ cd xyks-farm
 | `scripts/ms_push.py` | 上传并部署到魔搭 |
 | `docs/` | 架构 / 配额 / 部署三篇（用户想深入了解时再给链接） |
 
-自备签名 so（版权原因不入库，**部署必需**）：
+签名 so **已随仓库附带**（`xyks/so/`，取自官方 APK 的公开二进制，patched 版供 417 校验场景备用；**不含任何用户数据**，著作权归目标应用所有，仅供研究使用）：
 
 ```bash
-# 用户提供官方 APK 时：
+# 开箱即用：xyks/so/libRequestEncoder.so 已在仓库内
+# 如需自行验证来源，可从官方 APK 提取后覆盖：
 unzip -j <小猿口算.apk> "lib/armeabi-v7a/libRequestEncoder.so" -d xyks/so/
-# 用户已单独持有 so 文件时：直接放入 xyks/so/
-# 若服务端要求 path 污染校验（HTTP 417）：用姊妹仓库 opensource/snippets/sign/ 的 patch 脚本处理
+# 需要 path 污染校验补丁（HTTP 417 场景）时：用姊妹仓库 opensource/snippets/sign/ 的 patch 脚本
 ```
 
 #### 步骤 2 · 引导用户获取魔搭 Token（话术照发）
@@ -108,8 +108,8 @@ python xyks/crack_sign/login136.py
 
 #### 步骤 4 · 上传凭证并完成云端部署
 
-`login136.json` 与 `xyks/so/*.so` 不入 git，但魔搭运行时需要它们**随文件上传**
-（`ms_push.py` 按目录上传，不受 .gitignore 影响）：
+`login136.json` 不入 git，但魔搭运行时需要它**随文件上传**
+（`ms_push.py` 按目录上传，不受 .gitignore 影响；`xyks/so/` 已在仓库内自动带上）：
 
 ```powershell
 python scripts/ms_push.py    # 复用步骤 2 的环境变量（MS_TOKEN / XYKS_REPO）
@@ -159,8 +159,8 @@ python xyks_ai.py status          # 看分数与节奏
 #### 安全红线（Agent 全程强制）
 
 1. `MS_TOKEN` / 手机号 / 验证码 → **只进环境变量**，用完即弃；不写入文件、不进 commit、不在对话中回显完整值（最多显示前 4 位）。
-2. `login136.json`、`xyks/so/`、`*.jsonl`、`*.log` 已被 .gitignore 覆盖，**禁止**用 `git add -f` 强制入库。
-3. 魔搭仓库保持 **Private**；GitHub 仓库不得提交任何 `.so` 二进制。
+2. `login136.json`、`*.jsonl`、`*.log` 已被 .gitignore 覆盖，**禁止**用 `git add -f` 强制入库。
+3. 魔搭仓库保持 **Private**（内含你的 cookie）；GitHub 仓库不得提交 `login136.json` 等任何含用户数据的文件（`xyks/so/*.so` 为无用户数据的目标应用二进制，允许入库）。
 4. 遇到本手册未覆盖的异常：停下，把 `xyks_ai.py` 的 JSON 输出与平台日志摘要呈现给用户，由用户决策，不要自行猜测性重试。
 
 ---
@@ -263,10 +263,10 @@ flowchart LR
 # 1) 依赖（Python ≥ 3.10）
 pip install -r requirements.txt
 
-# 2) 自备签名 so（版权原因不随仓库分发）
-#    从官方 APK 提取：
+# 2) 签名 so 已随仓库附带（xyks/so/），开箱即用
+#    如需自行验证来源，可从官方 APK 提取覆盖：
 unzip -j <小猿口算.apk> "lib/armeabi-v7a/libRequestEncoder.so" -d xyks/so/
-#    签名校验 patch 脚本：见 1s-Answer 仓库 opensource/snippets/sign/
+#    417 校验补丁脚本：见 1s-Answer 仓库 opensource/snippets/sign/
 
 # 3) 登录拿 cookie（短信验证码）
 XYKS_PHONE=138xxxx  XYKS_SMS_CODE=xxxxxx python xyks/crack_sign/login136.py

@@ -170,7 +170,7 @@ def cmd_diagnose(a):
     if not os.path.exists(so):
         issues.append({"level": "high", "code": "SO_MISSING",
                        "msg": "缺 libRequestEncoder.so（签名模拟必需）",
-                       "fix": "unzip -j <小猿口算.apk> lib/armeabi-v7a/libRequestEncoder.so -d xyks/so/"})
+                       "fix": "xyks/so/libRequestEncoder.so 应随仓库附带；若缺失请重新克隆仓库或从官方 APK 提取 lib/armeabi-v7a/libRequestEncoder.so 放入 xyks/so/"})
 
     # 2) cookie
     ck = load_cookie()
