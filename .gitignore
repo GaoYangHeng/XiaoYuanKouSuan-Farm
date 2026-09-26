@@ -1,0 +1,48 @@
+# 凭证与会话
+login136.json
+*.cookie
+keystone.json
+
+# 运行时产物
+*.log
+*.jsonl
+farm.pid
+farm_stdout.log
+farm_daemon.log
+last_card_src.json
+last_resp.json
+req_capture.log
+_rank_out.txt
+.ms_upload_cache
+
+# 自备二进制（版权原因不入库，见 README 快速开始）
+xyks/so/
+*.so
+
+# 环境
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# 打包/系统杂物（防止误提交归档包复发）
+*.tgz
+*.tar.gz
+*.zip
+.DS_Store
+Thumbs.db
+*.pid
+
+# IDE
+.idea/
+.vscode/
+
+# 备份/压缩包防复发
+*.tgz
+*.tar.gz
+*.zip
+.env
+*.pid
+.DS_Store
+Thumbs.db
